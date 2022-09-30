@@ -1,0 +1,9 @@
+*.aux
+*.auxlock
+*.bbl
+*.blg
+*.cut
+*.log
+*.out
+*.pdf
+*.synctex.gz

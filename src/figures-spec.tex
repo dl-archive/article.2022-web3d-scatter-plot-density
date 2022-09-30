@@ -1,0 +1,32 @@
+
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,spy,shapes}
+
+\tikzset{thick/.style = {line width = 1.0pt}}
+
+\newlength{\pfull}  \setlength{\pfull}  {2mm}
+\newlength{\phalf}  \setlength{\phalf}  {0.5\pfull}
+
+\newlength{\lwffp}   \setlength{\lwffp}   {0.5000\dimexpr(\linewidth-1.0\pfull)}
+\newlength{\lwfffp}  \setlength{\lwfffp}  {0.3333\dimexpr(\linewidth-2.0\pfull)}
+\newlength{\lwffffp} \setlength{\lwffffp} {0.2500\dimexpr(\linewidth-3.0\pfull)}
+\newlength{\lwfffffp}\setlength{\lwfffffp}{0.2000\dimexpr(\linewidth-4.0\pfull)}
+
+\newlength{\twffp}   \setlength{\twffp}   {0.5000\dimexpr(\textwidth-1.0\pfull)}
+\newlength{\twfffp}  \setlength{\twfffp}  {0.3333\dimexpr(\textwidth-2.0\pfull)}
+\newlength{\twffffp} \setlength{\twffffp} {0.2500\dimexpr(\textwidth-3.0\pfull)}
+\newlength{\twfffffp}\setlength{\twfffffp}{0.2000\dimexpr(\textwidth-4.0\pfull)}
+
+\tikzstyle{labelStyle} = [ shape = rectangle, font = \scriptsize, text depth = 0, fill = white, inner sep = 4pt ]
+\tikzstyle{labelN}  = [ labelStyle, anchor = north ]
+\tikzstyle{labelNW} = [ labelStyle, anchor = north west ]
+\tikzstyle{labelNE} = [ labelStyle, anchor = north east ]
+\tikzstyle{labelS}  = [ labelStyle, anchor = south ]
+\tikzstyle{labelSW} = [ labelStyle, anchor = south west ]
+\tikzstyle{labelSE} = [ labelStyle, anchor = south east ]
+
+\tikzstyle{figRC} = [shape = rectangle, rounded corners = 2mm, clip] %
+\tikzstyle{spyRC} = [shape = rectangle, rounded corners = 2mm, %
+    white, connect spies, every spy on node/.append style = {thick}] %
+\tikzstyle{figNS} = [inner sep = 0pt, outer sep = 0pt] %
