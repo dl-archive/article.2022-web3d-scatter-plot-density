@@ -29,12 +29,22 @@ DOI: [10.1145/3564533.3564566](https://doi.org/10.1145/3564533.3564566) · Autho
 ```
 
 The paper was compiled on Overleaf in September 2022 (pdfTeX 1.40.24, TeX Live 2022), hence the TeX Live 2022 container.
-The build reproduces the camera-ready PDF pixel-identically (compared against the PDF distributed by ACM).
+On `main`, the build produces the revised version (`v1.1-revised`). Check out `v1.0-camera-ready` to reproduce the camera-ready PDF pixel-identically (compared against the PDF distributed by ACM).
 The TikZ figures (teaser, color maps, density fields) are taken from the externalized PDFs in `src/figures/`; to regenerate them, run `pdflatex -shell-escape` after deleting the respective `.pdf`/`.md5` files (the result differs by a few pixels).
 
 ## Versions
 
 - [`v1.0-camera-ready`](https://github.com/dl-archive/article.2022-web3d-scatter-plot-density/tree/v1.0-camera-ready) – sources as submitted to ACM (2022-09-30)
+- [`v1.1-revised`](https://github.com/dl-archive/article.2022-web3d-scatter-plot-density/tree/v1.1-revised) – author's revised version (2026-11-08): grammar and reference fixes, see [Revisions](#revisions)
+
+## Revisions
+
+`v1.1-revised` (2026-11-08) corrects errors in the camera-ready version without changing its content or layout (the TikZ-externalized figures are unchanged).
+Every page carries the note "Author's revised version (2026-11-08). Version of record: https://doi.org/10.1145/3564533.3564566".
+
+- Grammar and word choice: "It allows for interaction, filtering, and navigation" (abstract; was "interactive interaction"), "Wagner et al." (page header), "GitHub", "an overview of the data set", "hyperrectangles; however,", "virtual reality headsets", "scatter plot matrices", "e.g., by dynamically", "are then projected", "axis-aligned" (2×), "deducing" / "deduced" (Figure 5), "perpendicular to" (2×), "screen resolution, and rendering settings", "screen-aligned quad", "a maximum supported point count", "a 32-bit integer", "a 16-bit floating point texture", "however," (commas), "bilinear", "a mean of 255.5 and a standard deviation of 100" (footnote), "11 bits", "the chosen heuristic" (duplicate "the"), "post-processing", "by a factor 31.6", "Euclidean", "This project".
+- ORCID of Jürgen Döllner added (author link).
+- References: "SplatterJS" (Sarikaya and Gleicher 2015), journal name and article pages 7:1–7:32 (Chan et al.), issue number (Mayorga and Gleicher).
 
 ## Citation
 

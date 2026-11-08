@@ -210,6 +210,9 @@
 
 \hyphenation{WebGL}
 
+\usepackage{eso-pic}
+\AddToShipoutPictureFG{\AtPageLowerLeft{\put(\LenToUnit{0.5\paperwidth},\LenToUnit{6mm}){\makebox[0pt][c]{\fontsize{6.5}{8}\selectfont\color{gray}Author's revised version (2026-11-08). Version of record: https://doi.org/10.1145/3564533.3564566}}}}
+
 \begin{document}
 
 \title[Hardware-accelerated Rendering of Web-based 3D Scatter Plots with Projected Density Fields]{Hardware-accelerated Rendering of Web-based 3D Scatter Plots with Projected Density Fields and Embedded Controls}
@@ -240,19 +243,20 @@
 
 \author{J{\"u}rgen D{\"o}llner}
 \email{juergen.doellner@hpi.uni-potsdam.de}
+\orcid{0000-0002-8981-8583}
 \affiliation{
   \institution{Hasso Plattner Institute,\\University of Potsdam}
   \country{Germany}
 }
 
-\renewcommand{\shortauthors}{Wagner, et al.}
+\renewcommand{\shortauthors}{Wagner et al.}
 
 \begin{abstract}
     3D scatter plots depicting massive data suffer from occlusion, which makes it difficult to get an overview and perceive structure. 
     This paper presents a technique that facilitates the comprehension of heavily occluded 3D scatter plots. 
     Data points are projected to axial planes, creating x-ray-like 2D views that support the user in analyzing the data's density and layout.
     We showcase our open-source web application with a hardware-accelerated rendering component written in WebGL.
-    It allows for interactive interaction, filtering, and navigation with datasets up to hundreds of thousands of nodes.
+    It allows for interaction, filtering, and navigation with datasets up to hundreds of thousands of nodes.
     The implementation is detailed and discussed with respect to challenges posed by API and performance limitations.
 \end{abstract}
 
@@ -345,7 +349,7 @@ Our web-based viewer uses WebGL~2 and allows for interactive analysis of multi-m
 It is free to use, hosted on
 \href{https://varg.dev}{varg.dev}%
 \footnote{\href{https://demo.varg.dev/vidi/web3d-2022}{demo.varg.dev/vidi/web3d-2022}}, 
-and its source code is published on Github%
+and its source code is published on GitHub%
 \footnote{\href{https://github.com/lukaswagner/vidi}{github.com/lukaswagner/vidi}}.
 We complement this by discussing relevant API restrictions, storage limitations, and overall computational performance.
 
@@ -362,11 +366,11 @@ This approach projects the model onto a 2D plane.
 Objects of interest are highlighted using non-photorealistic rendering.
 
 Another approach for reducing occlusion issues is the reduction of scene elements.
-For exploring large data sets, clustering allows gaining a overview over the data set by reducing the number of visible elements.
+For exploring large data sets, clustering allows gaining an overview of the data set by reducing the number of visible elements.
 Rendering clusters as solid meshes instead of scatter plots \enquote{makes [\ldots] use of the innate 3D scene understanding capabilities of the human visual system} \cite{subspaceShapes}.
 Splatterplots is an aggregation approach dedicated to scatter plots \cite{splatterplots}.
 Instead of clustering, a less computation-heavy approach is binning.
-Typically, the data points are grouped into hyperrectangles, however, other patterns can be used as well \cite{binning}.
+Typically, the data points are grouped into hyperrectangles; however, other patterns can be used as well \cite{binning}.
 Alternatively to single-level aggregation, it's also possible to use hierarchical aggregations \cite{hierarchAggr}.
 This has the advantage of providing multiple layers of abstraction.
 Instead of reducing visible data points using aggregation, the points can also be filtered by some metric.
@@ -378,10 +382,10 @@ A natural first approach is the addition of shading.
 One possible option is cushion shading, which utilizes the fragment position to efficiently approximate realistic shading \cite{cushionShading}.
 Improving over this, ambient occlusion provides visual hints about spatial relations.
 For scatter plots, specific point-based ambient occlusion algorithms exist \cite{pointAO}.
-Furthermore, the restrictions of a 2D screen can be circumvented by using virtual reality headset or similar 3D technologies.
+Furthermore, the restrictions of a 2D screen can be circumvented by using virtual reality headsets or similar 3D technologies.
 All of these, however, do not solve the occlusion issues.
 
-A possible solution for occlusion in 3D scatter plots are scatter plots matrices.
+A possible solution for occlusion in 3D scatter plots are scatter plot matrices.
 Scatter plot matrices can also be used to navigate high-dimensional data sets \cite{scatplotnav}.
 The typical 2D matrix approach, however, does not provide much in the way of discovering the relationships between the graphs.
 For three dimensions, this can be improved by placing these graphs orthogonal to the three main axes.
@@ -392,7 +396,7 @@ Such an integration of 2D scatter plots is already supported in some 3D scatter 
 One variant of this are Regression Cubes, especially when examining both a 3D view and the three axis-aligned 2D facets \cite{regrCubes}.
 In sufficiently complex scenes, however, the 2D scatter plots may suffer from over-plotting, in turn hindering insights into the 3D visualization.
 
-One approach to solving over-plotting issues is reducing the opacity of the rendered points, e.g. by dynamically selecting an opacity based on the local density of points \cite{dynOpacity2dSP}.
+One approach to solving over-plotting issues is reducing the opacity of the rendered points, e.g., by dynamically selecting an opacity based on the local density of points \cite{dynOpacity2dSP}.
 Apart from opacity, other design parameters, such as the point size, can be automatically adjusted as well \cite{spPerceptOpti}.
 It is also possible to provide the user with more detailed views of high-density areas \cite{nestedSP}.
 In order to improve readability of 2D scatter plots, it's also possible to smooth out the plotted data using statistical metrics \cite{spSmoothing}.
@@ -412,7 +416,7 @@ In order to eliminate the over-plotting we propose creating density maps instead
 Thereby, more than one data point can affect the resulting scatter plot at any rasterized location.
 When plotting the data points, we render a gradient, starting with the maximum density at the point's center and falling off with increasing distance.
 By additively blending all points, we obtain an image where each pixel contains information about how many points are close to it.
-The density maps are then be projected onto the 3D scatter plot's grids, as shown in \autoref{fig:clusters}.
+The density maps are then projected onto the 3D scatter plot's grids, as shown in \autoref{fig:clusters}.
 This allows the user to spot and locate clusters of data points which may be occluded and concealed otherwise.
 
 \begin{figure}
@@ -554,16 +558,16 @@ In order to increase the scatter plot's interactive capabilities, we use graphic
 As the browser only provides interaction with HTML elements, this requires implementation of techniques such as picking (\autoref{sec:impl}).
 The user might want to filter and locate data points belonging to certain areas within the density maps.
 This is supported by hiding any data points occluding the area of interest.
-For this use case, we provide the user with sliders controlling axis aligned cutting planes.
+For this use case, we provide the user with sliders controlling axis-aligned cutting planes.
 These controls are placed co-planar to the grids and density maps.
 This allows using the grid lines as reference for placing the control handles based on the density maps.
 
-Another challenge is deducting a 3D point's position on the 2D density maps.
+Another challenge is deducing a 3D point's position on the 2D density maps.
 When hovering the cursor over a data point, we provide the user with reference lines to the respective position on all three planes (\autoref{fig:refline}).
-These reference lines are axis-aligned and thus perpendicular on the planes.
+These reference lines are axis-aligned and thus perpendicular to the planes.
 Inversely, we also provide the user with reference lines from a 2D map into the 3D scatter plot.
 By clicking on any of the density maps, the user can place such a line.
-This reference line once again is placed perpendicular on the respective plane (\autoref{fig:reflineGrid}).
+This reference line once again is placed perpendicular to the respective plane (\autoref{fig:reflineGrid}).
 Together, these reference line interaction techniques facilitate cross-references between the 3D scatter plot and the 2D density maps.
 
 \begin{figure}
@@ -574,7 +578,7 @@ Together, these reference line interaction techniques facilitate cross-reference
 
 \begin{figure}
   \includegraphics[width=\linewidth,trim={25cm 25cm 20cm 15cm},clip]{figures/refline_grid.png}
-  \caption{By placing a reference line onto any of the density maps, the points composing a cluster can be deducted.}
+  \caption{By placing a reference line onto any of the density maps, the points composing a cluster can be deduced.}
   \label{fig:reflineGrid}
 \end{figure}
 
@@ -582,10 +586,10 @@ Together, these reference line interaction techniques facilitate cross-reference
 \label{sec:impl}
 
 Our implementation uses WebGL~2 to provide a web-based data set introspection tool \cite{scatterplot}.
-Depending on the GPU, screen resolution and rendering settings, the maximum number of data points for interactive rendering ranges from 1 million to above 50 million.
+Depending on the GPU, screen resolution, and rendering settings, the maximum number of data points for interactive rendering ranges from 1 million to above 50 million.
 
 \paragraph{Density Maps.}
-The density maps are generated by additional render passes, using axis aligned orthographic projections.
+The density maps are generated by additional render passes, using axis-aligned orthographic projections.
 Thus, each vertex has to be rendered four times instead of once.
 However, as the density maps do not change once the data set is loaded, the additional render passes can be run once instead of on every frame.
 For encoding the density maps, we chose a 16-bit floating point RGB texture, with each channel storing one of the three maps (\autoref{fig:orthoDebug}).
@@ -660,7 +664,7 @@ An inverse falloff function would result in more abrupt density changes, with po
 In order to provide a useful default scaling for the density maps, the density should be normalized.
 This requires the maximum density to be determined.
 A trivial approach would be to read back all texels from the GPU's memory and calculate the maximum using the CPU.
-Instead, we render the texture to a lower resolution texture using a screen aligned quad, with each output texel calculated as the maximum of an $n\times{}n$ kernel, $n$ being the ratio between the textures' resolutions.
+Instead, we render the texture to a lower resolution texture using a screen-aligned quad, with each output texel calculated as the maximum of an $n\times{}n$ kernel, $n$ being the ratio between the textures' resolutions.
 For example,
 a $512\times512$ texture
 can be reduced to a single value using three passes with an $8\times8$ kernel ($512 \rightarrow 64 \rightarrow 8 \rightarrow 1$). 
@@ -678,12 +682,12 @@ Resizing the texture and disabling linear filtering allows for lower color resol
 \paragraph{Interaction.}
 
 Point selection is implemented using an ID buffer.
-IDs are stored as 32-bit unsigned integers, resulting in an maximum supported point count of over 4 billion.
+IDs are stored as 32-bit unsigned integers, resulting in a maximum supported point count of over 4 billion.
 If more distinct IDs are required, the IDs could be split into a high and low part, which are stored as separate variables.
 By reading back the pixel below the mouse cursor, the currently active data point can be determined.
 For placing reference lines on the density maps, this approach is reused.
 Reading this data back from the GPU allows discerning where the user clicked, as well as on which of the three planes.
-As the IDs are stored as an 32-bit integer, this data is packed into the same amount of bits.
+As the IDs are stored as a 32-bit integer, this data is packed into the same amount of bits.
 One byte is used to store the grid ID.
 The remaining 3 bytes store the x and y position on the grid, each encoded as a 12-bit integer.
 The precision of 4096 different positions per axis is enough for typical rendering scenarios.
@@ -700,7 +704,7 @@ This evaluation is split into two parts. First, we assess whether 16-bit floatin
 
 \paragraph{Density Map Precision.}
 
-When describing the density map generation, we noted that it is stored as an 16-bit floating point texture.
+When describing the density map generation, we noted that it is stored as a 16-bit floating point texture.
 In comparison with a 32-bit integer texture, this means a significant drop in precision.
 Even when using a 32-bit floating point texture, only 24 bits are used to store the mantissa (counting the hidden bit)\footnote{\href{https://www.khronos.org/opengl/wiki/Small_Float_Formats}{www.khronos.org/opengl/wiki/Small\_Float\_Formats}}.
 This affects how many points can overlap before any data loss occurs.
@@ -708,9 +712,9 @@ The required precision is dependent on both the point size and the falloff funct
 Storing 32-bit fixed point numbers with a precision of 0.01 would allow over 40 million points to overlap, while allowing each point to contribute a full density of 1 ($n = 2^{32}*0.01$).
 However, WebGL~2 does not support blending of any type for integer textures.
 This means we can't utilize additive blending to aggregate density values in an integer texture and therefore must build on floating point textures.
-A 32-bit floating point number however only allows for around 168 thousand overlapping points before data loss occurs at the second decimal ($n = 2^{24}*0.01$).
+A 32-bit floating point number, however, only allows for around 168 thousand overlapping points before data loss occurs at the second decimal ($n = 2^{24}*0.01$).
 
-32-bit textures introduce an additional issue, as WebGL~2 does not support bi-linear interpolation\footnote{\href{https://www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml}{www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml}}.
+32-bit textures introduce an additional issue, as WebGL~2 does not support bilinear interpolation\footnote{\href{https://www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml}{www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glTexImage2D.xhtml}}.
 This results in pixelated density maps.
 It is possible to manually implement the linear filtering inside the fragment shader, however this results in a performance impact.
 In order to utilize hardware-accelerated interpolation, the bit-depth must be reduced to 16.
@@ -719,22 +723,22 @@ While heavily reduced, this precision could still be considered acceptable based
 Assuming a normal distribution,
 around 0.04~\% of points affect the center pixel\footnote{
   Resolution 512~px, 5~px point size.
-  Using a mean of 255,5 and a standard derivation of 100, approximately 2~\% of points fall into the [253, 258] range, affecting the center pixel.
+  Using a mean of 255.5 and a standard deviation of 100, approximately 2~\% of points fall into the [253, 258] range, affecting the center pixel.
   Extending this to 2D results in only $0.02*0.02$, or 0.04~\% of points.
   See \href{https://onlinestatbook.com/2/calculators/normal_dist.html}{onlinestatbook.com/2/calculators/normal\_dist.html}
 }.
-A resolution of 11 bit thus is sufficient for data sets of up to 50 thousand points ($n = 2^{11}*0.01/(0.02^2)$).
+A resolution of 11 bits thus is sufficient for data sets of up to 50 thousand points ($n = 2^{11}*0.01/(0.02^2)$).
 Relaxing the precision requirement to 1 digit increases this to 500 thousand points.
 
 To support more points, the density calculation could
 use multiple frame buffers and distribute the points heuristically, e.g., based on the point ID.
-These could be added up in a post processing step.
+These could be added up in a post-processing step.
 
-In order to implement the distribution of points as minimally invasive as possible, one possible approach would be to extend the frame buffer by additional attachments. Based on the the chosen heuristic, the fragment shader writes only to one of them. This requires no adjustments to the underlying rendering process. This approach, however, is restricted by the maximum possible number of color attachments. The OpenGL ES 3 specification (which WebGL~2 is based on) requires \texttt{MAX\_COLOR\_ATTACHMENTS} to be at least 4, with modern devices often supporting more attachments.%
+In order to implement the distribution of points as minimally invasive as possible, one possible approach would be to extend the frame buffer by additional attachments. Based on the chosen heuristic, the fragment shader writes only to one of them. This requires no adjustments to the underlying rendering process. This approach, however, is restricted by the maximum possible number of color attachments. The OpenGL ES 3 specification (which WebGL~2 is based on) requires \texttt{MAX\_COLOR\_ATTACHMENTS} to be at least 4, with modern devices often supporting more attachments.%
 
 \paragraph{Performance.}
 The density map calculation takes less time than rendering the 3D scene.
-This results from a reduced resolution (e.g., $256\times256$ instead of $1920\times1080$, resulting in a fragment reduction by factor $31.6$), as well as the simpler fragment shader. 
+This results from a reduced resolution (e.g., $256\times256$ instead of $1920\times1080$, resulting in a fragment reduction by a factor $31.6$), as well as the simpler fragment shader. 
 On top of this, the density maps can be cached and reused as long as the underlying data is unchanged.
 In practice, this means that the density maps' performance impact is limited to texture lookups when drawing the grids.
 Thus, we confirmed earlier performance measurements, meaning that millions of data points can be interactively visualized on mid-range consumer hardware \cite{scatterplot}.
@@ -755,12 +759,12 @@ One possible enhancement is reducing the opacity of data points in low-density a
 Instead of displaying the density maps, the bounding planes could also be used to display additional data, such as aggregated point data.
 A comparison of different density falloff functions could also be worthwhile.
 The current implementation uses a linear falloff based on the intent of counting overlapping data points.
-Another option, inspired by metaballs, is the inverse squared euclidean distance.
+Another option, inspired by metaballs, is the inverse squared Euclidean distance.
 
 \begin{acks}
 This work was funded by the German Federal Ministry of Education and Research (BMBF, KMUi) within the project \enquote{Knowhow-Analyzer}.
 This work is part of the \enquote{Software-DNA} project, which was funded by the European Regional Development Fund (ERDF -- or EFRE in German) and the State of Brandenburg (ILB).
-This Project is supported by the Federal Ministry for Economic Affairs and Climate Action (BMWK, ZIM) on the basis of a decision by the German Bundestag.
+This project is supported by the Federal Ministry for Economic Affairs and Climate Action (BMWK, ZIM) on the basis of a decision by the German Bundestag.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
