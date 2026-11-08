@@ -4,7 +4,7 @@
 
 *Proceedings of the 27th International Conference on 3D Web Technology (Web3D '22)*, November 2–4, 2022, Evry-Courcouronnes, France. ACM.
 
-DOI: [10.1145/3564533.3564566](https://doi.org/10.1145/3564533.3564566) · Author's version: Zenodo *(pending)* · Best Paper Award ([Web3D awards](https://web3d.siggraph.org/awards/)) · Code: [lukaswagner/vidi](https://github.com/lukaswagner/vidi) · [Live demo](https://demo.varg.dev/vidi/web3d-2022)
+DOI: [10.1145/3564533.3564566](https://doi.org/10.1145/3564533.3564566) · Author's version: [Zenodo](https://doi.org/10.5281/zenodo.24061770) · Best Paper Award ([Web3D awards](https://web3d.siggraph.org/awards/)) · Code: [lukaswagner/vidi](https://github.com/lukaswagner/vidi) · [Live demo](https://demo.varg.dev/vidi/web3d-2022)
 
 > 3D scatter plots depicting massive data suffer from occlusion, which makes it difficult to get an overview and perceive structure.
 > This paper presents a technique that facilitates the comprehension of heavily occluded 3D scatter plots.
