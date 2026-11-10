@@ -13,7 +13,8 @@ DOI: [10.1145/3564533.3564566](https://doi.org/10.1145/3564533.3564566) · Autho
 > It allows for interactive interaction, filtering, and navigation with datasets up to hundreds of thousands of nodes.
 > The implementation is detailed and discussed with respect to challenges posed by API and performance limitations.
 
-<p><a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-1.webp" width="24%" alt="page 1"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-2.webp" width="24%" alt="page 2"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-3.webp" width="24%" alt="page 3"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-4.webp" width="24%" alt="page 4"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-5.webp" width="24%" alt="page 5"/></a></p>
+<p><a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-1.webp" width="24%" alt="page 1"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-2.webp" width="24%" alt="page 2"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-3.webp" width="24%" alt="page 3"/></a> <a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-4.webp" width="24%" alt="page 4"/></a></p>
+<details><summary>All 5 pages</summary><p><a href="wagner2022-scatter-plot-density-as-submitted.pdf"><img src="preview/page-5.webp" width="24%" alt="page 5"/></a></p></details>
 
 ## Contents
 
